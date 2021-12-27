@@ -11,11 +11,8 @@ app.get('/', (req, res) => {
 
 io.on('connection', (socket) => {
 
-    socket.onAny((event, ...args) => {
-        console.log(event, args);
-    });
-
     socket.broadcast.emit('user-connection', '*a user connected*');
+    console.log("*a user connected*")
 
     socket.on('chat message', msg => {
         io.emit('chat message', msg);
@@ -23,6 +20,7 @@ io.on('connection', (socket) => {
 
     socket.on('disconnect', () => {
         socket.broadcast.emit('user-disconnection','*user disconnected*');
+        console.log("*a user disconnected*")
     });
 });
 
