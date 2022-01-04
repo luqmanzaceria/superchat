@@ -36,26 +36,23 @@
             }
         });
 
-
-        socket.on('user-connection', function(msg) {
+        function newMsg(msg) {
             var item = document.createElement('li');
             item.textContent = msg;
             messages.appendChild(item);
             window.scrollTo(0, document.body.scrollHeight);
+        }
+
+        socket.on('user-connection', function(msg) {
+            newMsg(msg)
         });
 
         socket.on('chat message', function(msg) {
-            var item = document.createElement('li');
-            item.textContent = msg;
-            messages.appendChild(item);
-            window.scrollTo(0, document.body.scrollHeight);
+            newMsg(msg)
         });
 
         socket.on('user-disconnection', function(msg) {
-            var item = document.createElement('li');
-            item.textContent = msg;
-            messages.appendChild(item);
-            window.scrollTo(0, document.body.scrollHeight);
+            newMsg(msg)
         });
     </script>
   </body>
