@@ -4,6 +4,7 @@ const admin = require('firebase-admin');
 admin.initializeApp();
 
 const db = admin.firestore();
+const auth = firebase.auth();
 
 exports.detectEvilUsers = functions.firestore
        .document('messages/{msgId}')
@@ -12,20 +13,19 @@ exports.detectEvilUsers = functions.firestore
         const filter = new Filter();
         const { text, uid } = doc.data(); 
 
-
         if (filter.isProfane(text)) {
 
             const cleaned = filter.clean(text);
             await doc.ref.update({text: `🤐 I got BANNED for life for saying... ${cleaned}`});
-
-            await db.collection('banned').doc(uid).set({});
+            
+            await db.collection('banned').doc(uid).set({})
         } 
 
         const userRef = db.collection('users').doc(uid)
 
         const userData = (await userRef.get()).data();
 
-        if (userData.msgCount >= 7) {
+        if (userData.msgCount >= 10) {
             await db.collection('banned').doc(uid).set({});
         } else {
             await userRef.set({ msgCount: (userData.msgCount || 0) + 1 })
