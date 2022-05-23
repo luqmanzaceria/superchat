@@ -4,7 +4,6 @@ const admin = require('firebase-admin');
 admin.initializeApp();
 
 const db = admin.firestore();
-const auth = firebase.auth();
 
 exports.detectEvilUsers = functions.firestore
        .document('messages/{msgId}')
