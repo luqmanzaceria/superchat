@@ -10,13 +10,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 
 firebase.initializeApp({
-  apiKey: "AIzaSyDohOFRy0MJ5bfD9JWdTQqDypoKnbqdx5c",
-  authDomain: "convo-d7181.firebaseapp.com",
-  projectId: "convo-d7181",
-  storageBucket: "convo-d7181.appspot.com",
-  messagingSenderId: "679719658094",
-  appId: "1:679719658094:web:2e53acfbf91de3b4fefc7f",
-  measurementId: "G-0V3T0FCFY5"
+  // your config
 })
 
 const auth = firebase.auth();
